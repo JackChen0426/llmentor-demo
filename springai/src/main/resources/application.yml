@@ -1,6 +1,10 @@
 spring:
   application:
     name: llmentor-demo
+  ai:
+    dashscope:
+      api-key: sk-8a0568dcae9a40bda1fb119e57002594
+
 
 server:
     port: 8000
