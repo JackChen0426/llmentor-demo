@@ -1,9 +1,14 @@
 package com.cxs.llm.mentor.controller;
 
+import dev.langchain4j.model.chat.response.ChatResponse;
+import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 /**
  * @author chenxingsheng
@@ -16,8 +21,39 @@ public class LangChainController {
     @Autowired
     OpenAiChatModel chatModel;
 
+    @Autowired
+    OpenAiStreamingChatModel streamingChatModel;
+
     @RequestMapping("/hello")
     public String hello() {
         return chatModel.chat("你好,你是谁？");
     }
+
+    @RequestMapping("/streamTest")
+    public Flux<String> streamTest(HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+
+        Flux<String> flux = Flux.create(fluxSink -> {
+            streamingChatModel.chat("你好,你是谁？", new StreamingChatResponseHandler() {
+                @Override
+                public void onPartialResponse(String partialResponse) {
+                    fluxSink.next(partialResponse);
+                }
+
+                @Override
+                public void onCompleteResponse(ChatResponse completeResponse) {
+                    fluxSink.complete();
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    fluxSink.error(error);
+                }
+            });
+        });
+
+
+        return flux;
+    }
+
 }
