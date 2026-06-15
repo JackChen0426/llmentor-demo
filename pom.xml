@@ -21,6 +21,7 @@
         <module>springai</module>
         <module>langchain4j</module>
         <module>function-call</module>
+        <module>mcp</module>
     </modules>
 
 
