@@ -11,4 +11,19 @@
 
     <artifactId>mcp-client</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-client</artifactId>
+            <version>${spring.ai.version}</version>
+        </dependency>
+
+    </dependencies>
+
 </project>

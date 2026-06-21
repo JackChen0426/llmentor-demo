@@ -1,9 +1,35 @@
+server:
+  port: 8001
+
+
 spring:
   application:
     name: mcp-client
   ai:
     dashscope:
       api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
-
-server:
-  port: 8001
+    mcp:
+      client:
+        enabled: true
+        name: my-mcp-client
+        version: 1.0.0
+        request-timeout: 60s
+        type: SYNC
+        stdio:
+          connections:
+            weather-stdio:
+              command: "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java"
+              args:
+                - "-jar"
+                - "/Users/chenxingsheng/IDEA_Workspace/llmentor-demo/mcp/mcp-server-stdio/target/mcp-server-stdio-0.0.1-SNAPSHOT.jar"
+        ##          servers-configuration: classpath:/mcp-servers.json
+        sse:
+          connections:
+            weather-sse:
+              url: http://127.0.0.1:8003/
+              sse-endpoint: sse
+        streamable-http:
+          connections:
+            weather-streamable:
+              url: http://127.0.0.1:8004/stream/test/
+              endpoint: api/mcp
