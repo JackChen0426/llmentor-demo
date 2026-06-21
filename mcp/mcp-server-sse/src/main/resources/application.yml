@@ -1,9 +1,29 @@
+server:
+  port: 8003
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+#    context-path: /test
+
 spring:
   application:
-    name: mcp-server-sse
+    name: mcp-weather-sse
   ai:
     dashscope:
       api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
-
-server:
-  port: 8002
+    mcp:
+      server:
+        enabled: true
+        name: weather-sse-server
+        version: 1.0.0
+        type: SYNC
+        capabilities:
+          tool: true
+          resource: false
+          prompt: false
+          completion: false
+        sse-message-endpoint: /mcp/messages   # 客户端向 MCP Server 发送指令（"写信"）
+        sse-endpoint: /sse                    # 客户端订阅服务器推送消息（"听收音机"）
+#        base-url: /test
