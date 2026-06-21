@@ -1,9 +1,19 @@
 spring:
-  application:
-    name: mcp-server-stdio
-  ai:
-    dashscope:
-      api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
+  main:
+    web-application-type: none
+    banner-mode: off
 
-server:
-  port: 8004
+  ai:
+  dashscope:
+    api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
+    mcp:
+      server:
+        name: mcp-server
+        version: 1.0.0
+        stdio: true
+        enabled: true
+        type: SYNC
+
+logging:
+  level:
+    root: OFF
