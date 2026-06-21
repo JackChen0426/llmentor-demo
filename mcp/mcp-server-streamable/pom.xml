@@ -11,4 +11,12 @@
 
     <artifactId>mcp-server-streamable</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>

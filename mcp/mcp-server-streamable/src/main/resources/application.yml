@@ -1,9 +1,30 @@
+server:
+  port: 8004
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    context-path: /stream/test
+
 spring:
   application:
-    name: mcp-server-streamable
+    name: mcp-weather-streamable
   ai:
     dashscope:
       api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
-
-server:
-  port: 8005
+    mcp:
+      server:
+        protocol: STREAMABLE  # STATELESS
+        name: streamable-mcp-server
+        version: 1.0.0
+        type: SYNC
+        instructions: "这个服务是用来查询城市天气的。"
+        resource-change-notification: true
+        tool-change-notification: true
+        prompt-change-notification: true
+        annotation-scanner:
+          enabled: true
+        streamable-http:
+          mcp-endpoint: /api/mcp
+          keep-alive-interval: 30s
