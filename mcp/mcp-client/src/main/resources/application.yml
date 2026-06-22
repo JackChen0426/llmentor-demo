@@ -6,6 +6,14 @@ spring:
   application:
     name: mcp-client
   ai:
+    openai:
+      api-key: @dashscope.api.key@
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.7
+          maxTokens: 5000
     dashscope:
       api-key: ${DASHSCOPE_API_KEY:sk-8a0568dcae9a40bda1fb119e57002594}
     mcp:
